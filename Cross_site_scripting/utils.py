@@ -10,3 +10,10 @@ def check_succes(soup):
 def parse_html(response):
     return BeautifulSoup(response.content,'html.parser')
 
+def get_csrf(session,url):
+    response=session.get(url)
+    soup=parse_html(response)
+    token = soup.find('input', {'name': 'csrf'})["value"]
+    return token
+
+
